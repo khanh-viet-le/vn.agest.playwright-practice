@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@fixtures/*": ["fixtures/*.fixture.ts"],
+      "@models/*": [
+        "data-objects/*.model.ts", 
+        "data-objects/*.type.ts", 
+        "data-objects/*.interface.ts", 
+        "data-objects/*.enum.ts"
+      ],
+      "@pages/*": ["page-objects/*.page.ts"],
+      "@components/*": ["page-objects/components/*.component.ts"],
+      "@datas/*": ["test-datas/*.data.ts", "test-datas/*.data.json"],
+      "@common/*": ["common/*.ts"],
+      "@helpers/*": ["common/helpers/*.helper.ts"]
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "business-flows/**/*.ts", 
+    "common/**/*.ts", 
+    "data-objects/**/*.ts", 
+    "page-objects/**/*.ts", 
+    "test-datas/**/*.ts", 
+    "test-datas/**/*.json", 
+    "tests/**/*.ts", 
+    "playwright.config.ts"
+  ],
+  "exclude": ["node_modules"]
+}
