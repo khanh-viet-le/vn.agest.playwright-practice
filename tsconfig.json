@@ -29,7 +29,7 @@
     "types": ["node"]
   },
   "include": [
-    "business-flows/**/*.ts", 
+    "fixtures/**/*.ts", 
     "common/**/*.ts", 
     "data-objects/**/*.ts", 
     "page-objects/**/*.ts", 

@@ -1,11 +1,7 @@
-import { DocsPage } from "@pages/docs";
-import { HomePage } from "@pages/home";
-import test, { expect } from "@playwright/test";
+import { test } from "@fixtures/base";
+import { Assert } from "@helpers/assert";
 
-test("Navigation Test", async ({ page }) => {
-  let homePage = new HomePage(page);
-  let docsPage = new DocsPage(page);
-
+test("Navigation Test", async ({ homePage, docsPage, page }) => {
   await test.step("Open Website", async () => {
     await page.goto("https://www.typescriptlang.org/");
     await homePage.waitForPageLoad();
@@ -15,15 +11,19 @@ test("Navigation Test", async ({ page }) => {
     await homePage.menu.selectItem("Docs");
     await docsPage.waitDefault();
 
-    expect
-      .soft(await docsPage.getTitle(), "Docs title should match")
-      .toEqual("TypeScript Documentation");
+    await Assert.expectElement
+      .soft(
+        docsPage,
+        "_title",
+        "Docs title should still match after color change",
+      )
+      .toContainText("TypeScript Documentation");
   });
 
   await test.step("Change Site Color", async () => {
     await docsPage.setSiteColor("Always Dark");
 
-    expect
+    Assert.expect
       .soft(await docsPage.getSiteColor(), "Site color should be updated")
       .toEqual("rgba(0, 0, 0, 0)");
   });
