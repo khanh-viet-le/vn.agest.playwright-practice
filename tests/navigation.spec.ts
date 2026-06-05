@@ -1,5 +1,5 @@
 import { Logger } from "@helpers/logger";
-import { test } from "@fixtures/base";
+import { test } from "src/fixtures/base.fixture";
 import { Assert } from "@helpers/assert";
 
 test("Navigation Test", async ({ homePage, docsPage }) => {
