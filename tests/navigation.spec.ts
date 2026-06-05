@@ -1,11 +1,9 @@
+import { Logger } from "@helpers/logger";
 import { test } from "@fixtures/base";
 import { Assert } from "@helpers/assert";
 
-test("Navigation Test", async ({ homePage, docsPage, page }) => {
-  await test.step("Open Website", async () => {
-    await page.goto("https://www.typescriptlang.org/");
-    await homePage.waitForPageLoad();
-  });
+test("Navigation Test", async ({ homePage, docsPage }) => {
+  await test.step("Open Website", async () => await homePage.open());
 
   await test.step('Select "Docs" In Menu', async () => {
     await homePage.menu.selectItem("Docs");

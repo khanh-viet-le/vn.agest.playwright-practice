@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "commonjs",
+    "lib": ["ES2020", "DOM"],
     "moduleResolution": "node",
     "ignoreDeprecations": "6.0",
     "allowSyntheticDefaultImports": true,
@@ -26,7 +27,7 @@
       "@common/*": ["common/*.ts"],
       "@helpers/*": ["common/helpers/*.helper.ts"]
     },
-    "types": ["node"]
+    "types": ["node"],
   },
   "include": [
     "fixtures/**/*.ts", 
@@ -38,5 +39,5 @@
     "tests/**/*.ts", 
     "playwright.config.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

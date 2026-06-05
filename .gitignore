@@ -6,3 +6,23 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Visual Studio Code
+.vscode/
+.vscode-test/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+
+# Logslogs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MacOS
+.DS_Store

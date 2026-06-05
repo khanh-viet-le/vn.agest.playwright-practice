@@ -188,10 +188,10 @@ export class Element {
   async getCssValue(property: string) {
     await this.waitForAttached();
 
-    return await this.locator.evaluate(
-      (e, property) => window.getComputedStyle(e).getPropertyValue(property),
-      property,
-    );
+    return await this.locator.evaluate((e, property) => {
+      const view = e.ownerDocument?.defaultView || window;
+      return view.getComputedStyle(e).getPropertyValue(property);
+    }, property);
   }
   //#endregion
 
