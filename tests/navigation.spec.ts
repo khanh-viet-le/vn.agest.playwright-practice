@@ -1,14 +1,15 @@
-import { Logger } from "@helpers/logger";
-import { test } from "src/fixtures/base.fixture";
+import { test } from "@fixtures/base";
 import { Assert } from "@helpers/assert";
-import { DocsPage } from "@pages/docs";
+import { Logger } from "@helpers/logger";
 
-test("Navigation Test", async ({ homePage, docsPage, page }) => {
+test("Navigation Test", async ({ homePage, docsPage }) => {
   await test.step("Open Website", async () => await homePage.open());
 
   await test.step('Select "Docs" In Menu', async () => {
     await homePage.menu.selectItem("Docs");
     await docsPage.waitDefault();
+
+    Logger.debug(await docsPage.getTitle());
 
     await Assert.expectElement
       .soft(

@@ -14,6 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
+      "@helpers/*": ["src/common/helpers/*.helper.ts"],
       "@locators/*": ["src/locators/*.locator.ts"],
       "@fixtures/*": ["src/fixtures/*.fixture.ts"],
       "@models/*": [
@@ -26,7 +27,6 @@
       "@components/*": ["src/page-objects/components/*.component.ts"],
       "@datas/*": ["test-datas/*.data.ts", "test-datas/*.data.json"],
       "@common/*": ["src/common/*.ts"],
-      "@helpers/*": ["src/common/helpers/*.helper.ts"]
     },
     "types": ["node"],
   },
