@@ -1,8 +1,9 @@
 import { Logger } from "@helpers/logger";
 import { test } from "src/fixtures/base.fixture";
 import { Assert } from "@helpers/assert";
+import { DocsPage } from "@pages/docs";
 
-test("Navigation Test", async ({ homePage, docsPage }) => {
+test("Navigation Test", async ({ homePage, docsPage, page }) => {
   await test.step("Open Website", async () => await homePage.open());
 
   await test.step('Select "Docs" In Menu', async () => {
@@ -12,7 +13,7 @@ test("Navigation Test", async ({ homePage, docsPage }) => {
     await Assert.expectElement
       .soft(
         docsPage,
-        "_title",
+        "title",
         "Docs title should still match after color change",
       )
       .toContainText("TypeScript Documentation");

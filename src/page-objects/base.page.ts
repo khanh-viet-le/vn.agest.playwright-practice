@@ -1,8 +1,14 @@
+import { LocatorHelper } from "@helpers/locator";
 import { Timeout } from "@common/timeout";
 import { Page } from "@playwright/test";
 
 export abstract class BasePage {
-  constructor(protected readonly page: Page) {}
+  protected locatorHelper: LocatorHelper;
+  public locators!: Record<string, any>;
+
+  constructor(protected readonly page: Page) {
+    this.locatorHelper = new LocatorHelper();
+  }
 
   public async waitDefault(timeout: number = Timeout.PAGE_DEFAULT) {
     await this.page.waitForTimeout(timeout);

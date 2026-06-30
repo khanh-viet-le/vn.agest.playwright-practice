@@ -14,13 +14,13 @@ type Type =
 
 export class Element {
   //#region Properties
-  private readonly type: Type;
-  private rawLocator: string;
-  private _locator?: Locator;
+  protected readonly type: Type;
+  protected rawLocator: string;
+  protected _locator?: Locator;
   //#endregion
 
   constructor(
-    private readonly page: Page,
+    protected readonly page: Page,
     locator: string = "",
   ) {
     const [_type, _locator] = locator.split(":");
@@ -29,7 +29,7 @@ export class Element {
   }
 
   //#region  Setup function
-  private get locator(): Locator {
+  protected get locator(): Locator {
     if (!this._locator) {
       this._locator = this.buildLocator().first();
     }
@@ -177,7 +177,7 @@ export class Element {
 
   async getText() {
     await this.waitForAttached();
-    return await this.locator.textContent();
+    return (await this.locator.textContent()) ?? "";
   }
 
   async getAttribute(attribute: string) {
@@ -234,6 +234,40 @@ export class Element {
 
   async waitDefault(timeout: number = Timeout.ELEMENT_DEFAULT) {
     await this.locator.waitFor({ timeout });
+
+    return this;
+  }
+  //#endregion
+
+  //#region Alert handling
+  async acceptAlert() {
+    this.page.on("dialog", async (dialog) => {
+      await dialog.accept();
+    });
+
+    return this;
+  }
+
+  async dismissAlert() {
+    this.page.on("dialog", async (dialog) => {
+      await dialog.dismiss();
+    });
+
+    return this;
+  }
+
+  async getAlertMessage() {
+    return new Promise<string>((resolve) => {
+      this.page.on("dialog", async (dialog) => {
+        resolve(dialog.message());
+      });
+    });
+  }
+
+  async sendAlertText(text: string) {
+    this.page.on("dialog", async (dialog) => {
+      await dialog.accept(text);
+    });
 
     return this;
   }

@@ -1,28 +1,32 @@
 import { Element } from "@components/element";
 import { BasePage } from "@pages/base";
-import { expect } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 export class Assert {
   //#region Private Methods
-  private static getLocator = (page: any, key: string) => {
-    const element = new Element(page.page, page[key]);
+  private static getLocator = (page: Page, key: string) => {
+    const element = new Element(page, key);
     return (element as any).locator;
   };
 
   private static expectElementBase = <P extends BasePage>(
     page: P,
-    key: string,
+    key: keyof P["locators"],
     message?: string,
   ) => {
-    return expect(this.getLocator(page, key), message);
+    const { page: p, locators } = page as any;
+    const locator = Assert.getLocator(p, locators[key]);
+    return expect(locator, message);
   };
 
   private static expectElementSoft = <P extends BasePage>(
     page: P,
-    key: string,
+    key: keyof P["locators"],
     message?: string,
   ) => {
-    return expect.soft(this.getLocator(page, key), message);
+    const { page: p, locators } = page as any;
+    const locator = Assert.getLocator(p, locators[key]);
+    return expect.soft(locator, message);
   };
   //#endregion
 

@@ -1,24 +1,23 @@
 import { Element } from "@components/element";
 import { GeneralPage } from "@pages/general";
+import docPageLocators from "@locators/doc-page";
 
 export class DocsPage extends GeneralPage {
-  private readonly _title = "css:h1";
-  private readonly _siteColor = "css:select[name=colours]";
-  private readonly _content = "css:main div";
+  locators = this.locatorHelper.addLocators(docPageLocators).get();
 
   async getTitle() {
-    return await new Element(this.page, this._title).getText();
+    return await new Element(this.page, this.locators.title).getText();
   }
 
   async setSiteColor(color: string) {
-    const colorSelect = new Element(this.page, this._siteColor);
+    const colorSelect = new Element(this.page, this.locators.siteColor);
     await colorSelect.select(undefined, color);
     await colorSelect.waitDefault();
     await this.waitForPageLoad();
   }
 
   async getSiteColor() {
-    return await new Element(this.page, this._content).getCssValue(
+    return await new Element(this.page, this.locators.content).getCssValue(
       "background-color",
     );
   }

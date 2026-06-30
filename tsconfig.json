@@ -14,6 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
+      "@locators/*": ["src/locators/*.locator.ts"],
       "@fixtures/*": ["src/fixtures/*.fixture.ts"],
       "@models/*": [
         "src/data-objects/*.model.ts", 
@@ -31,6 +32,7 @@
   },
   "include": [
     "src/fixtures/**/*.ts", 
+    "src/locators/**/*.ts", 
     "src/common/**/*.ts", 
     "src/data-objects/**/*.ts", 
     "src/page-objects/**/*.ts", 
